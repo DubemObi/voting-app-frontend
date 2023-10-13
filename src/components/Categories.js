@@ -10,13 +10,17 @@ class Categories extends React.Component {
     this.props = props;
     this.state = {
       contestant: [],
-      model: [],
-      influencer: [],
-      lifetime: [],
-      school: [],
-      isModelActive: false,
+
+      isModelActive: true,
+      isInfluencerActive: false,
+      isLifetimeActive: false,
+      isSchoolActive: false,
     };
-    this.handleIconChange = this.handleIconChange.bind(this);
+    this.handleModelIconChange = this.handleModelIconChange.bind(this);
+    this.handleLifetimeIconChange = this.handleLifetimeIconChange.bind(this);
+    this.handleInfluencerIconChange =
+      this.handleInfluencerIconChange.bind(this);
+    this.handleSchoolIconChange = this.handleSchoolIconChange.bind(this);
   }
   componentDidMount() {
     const getContestant = async () => {
@@ -39,24 +43,42 @@ class Categories extends React.Component {
       //   });
     };
     getContestant();
-    console.log(this.state.contestant);
-    const { influencer, model, lifetime, school } = this.state;
-    console.log(influencer, model, school, lifetime);
   }
-  //   async getContestant() {
-  //     const res = await axios.get(
-  //       "http://localhost:2009/api/v1/contestant"
 
-  //     );
-  //     // this.setState({ contestant: res });
-  //     console.log(res);
-  //   }
-  handleIconChange() {
+  handleModelIconChange() {
     this.setState((state) => {
       if (state.isModelActive) {
         return { isModelActive: false };
       } else {
         return { isModelActive: true };
+      }
+    });
+  }
+
+  handleInfluencerIconChange() {
+    this.setState((state) => {
+      if (state.isInfluencerActive) {
+        return { isInfluencerActive: false };
+      } else {
+        return { isInfluencerActive: true };
+      }
+    });
+  }
+  handleLifetimeIconChange() {
+    this.setState((state) => {
+      if (state.isLifetimeActive) {
+        return { isLifetimeActive: false };
+      } else {
+        return { isLifetimeActive: true };
+      }
+    });
+  }
+  handleSchoolIconChange() {
+    this.setState((state) => {
+      if (state.isSchoolActive) {
+        return { isSchoolActive: false };
+      } else {
+        return { isSchoolActive: true };
       }
     });
   }
@@ -78,8 +100,6 @@ class Categories extends React.Component {
       });
     };
 
-    // console.log(this.state.contestant);
-
     return (
       <div>
         <section id="categories">
@@ -99,11 +119,11 @@ class Categories extends React.Component {
                   <FontAwesomeIcon
                     icon={faMinus}
                     id="category-icon"
-                    onClick={this.handleIconChange}
+                    onClick={this.handleModelIconChange}
                   />
                 </div>
                 <div id="category-contestants">
-                  {allContestant("fashion-lifetime-achievement-award")}
+                  {allContestant("fashion-model-of-the-year")}
                 </div>
               </div>
             ) : (
@@ -119,41 +139,118 @@ class Categories extends React.Component {
                   <FontAwesomeIcon
                     icon={faPlus}
                     id="category-icon"
-                    onClick={this.handleIconChange}
+                    onClick={this.handleModelIconChange}
                   />
                 </div>
               </div>
             )}
             <hr />
-            <div id="category-layer">
-              <div id="category-identifier">
-                <div id="category-number">
-                  <h4>2</h4>
+            {!this.state.isLifetimeActive ? (
+              <div id="category-layer">
+                <div id="category-identifier">
+                  <div id="category-number">
+                    <h4>2</h4>
+                  </div>
+                  <h2 id="category-name">FASHION LIFETIME ACHIEVEMENT AWARD</h2>
                 </div>
-                <h2 id="category-name">FASHION LIFETIME ACHIEVEMENT AWARD</h2>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  id="category-icon"
+                  onClick={this.handleLifetimeIconChange}
+                />
               </div>
-              <FontAwesomeIcon icon={faPlus} id="category-icon" />
-            </div>
+            ) : (
+              <div>
+                <div id="category-layer">
+                  <div id="category-identifier">
+                    <div id="category-number">
+                      <h4>2</h4>
+                    </div>
+                    <h2 id="category-name">
+                      FASHION LIFETIME ACHIEVEMENT AWARD
+                    </h2>
+                  </div>
+                  <FontAwesomeIcon
+                    icon={faMinus}
+                    id="category-icon"
+                    onClick={this.handleLifetimeIconChange}
+                  />
+                </div>
+                <div id="category-contestants">
+                  {allContestant("fashion-lifetime-achievement-award")}
+                </div>
+              </div>
+            )}
             <hr />
-            <div id="category-layer">
-              <div id="category-identifier">
-                <div id="category-number">
-                  <h4>3</h4>
+            {!this.state.isInfluencerActive ? (
+              <div id="category-layer">
+                <div id="category-identifier">
+                  <div id="category-number">
+                    <h4>3</h4>
+                  </div>
+                  <h2 id="category-name">FASHION INFLUENCER OF THE YEAR</h2>
                 </div>
-                <h2 id="category-name">FASHION INFLUENCER OF THE YEAR</h2>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  id="category-icon"
+                  onClick={this.handleInfluencerIconChange}
+                />
               </div>
-              <FontAwesomeIcon icon={faPlus} id="category-icon" />
-            </div>
+            ) : (
+              <div>
+                <div id="category-layer">
+                  <div id="category-identifier">
+                    <div id="category-number">
+                      <h4>2</h4>
+                    </div>
+                    <h2 id="category-name">FASHION INFLUENCER OF THE YEAR</h2>
+                  </div>
+                  <FontAwesomeIcon
+                    icon={faMinus}
+                    id="category-icon"
+                    onClick={this.handleInfluencerIconChange}
+                  />
+                </div>
+                <div id="category-contestants">
+                  {allContestant("fashion-influencer-of-the-year")}
+                </div>
+              </div>
+            )}
             <hr />
-            <div id="category-layer">
-              <div id="category-identifier">
-                <div id="category-number">
-                  <h4>4</h4>
+            {!this.state.isSchoolActive ? (
+              <div id="category-layer">
+                <div id="category-identifier">
+                  <div id="category-number">
+                    <h4>4</h4>
+                  </div>
+                  <h2 id="category-name">FASHION SCHOOL OF THE YEAR </h2>
                 </div>
-                <h2 id="category-name">FASHION SCHOOL OF THE YEAR </h2>
+                <FontAwesomeIcon
+                  icon={faPlus}
+                  id="category-icon"
+                  onClick={this.handleSchoolIconChange}
+                />
               </div>
-              <FontAwesomeIcon icon={faPlus} id="category-icon" />
-            </div>
+            ) : (
+              <div>
+                <div id="category-layer">
+                  <div id="category-identifier">
+                    <div id="category-number">
+                      <h4>2</h4>
+                    </div>
+                    <h2 id="category-name">FASHION SCHOOL OF THE YEAR</h2>
+                  </div>
+                  <FontAwesomeIcon
+                    icon={faMinus}
+                    id="category-icon"
+                    onClick={this.handleSchoolIconChange}
+                  />
+                </div>
+                <div id="category-contestants">
+                  {allContestant("fashion-school-of-the-year")}
+                </div>
+              </div>
+            )}
             <hr />
           </div>
         </section>
