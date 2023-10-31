@@ -159,18 +159,27 @@
   width: 400px;
   margin-left: 50px;
 }
+
+#hero-text-div {
+  width: 100%;
+  height: calc(100vh - 80px);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #hero-text {
   font-size: 5.5rem;
   width: 60%;
   color: var(--white-color);
-  position: absolute;
+  /* position: absolute;
   top: 20%;
-  left: 21%;
+  left: 21%; */
   overflow: hidden;
   font-family: merchant;
   font-weight: 400;
   border: 2px solid var(--gold-color);
-  padding: 25px;
+  padding: 40px;
   border-radius: 10px;
   /* box-sizing: border-box; */
 }
@@ -179,6 +188,7 @@
   background-color: var(--black-color);
   width: 100%;
   padding: 70px 100px;
+  padding-bottom: 120px;
   color: var(--white-color);
   box-sizing: border-box;
 }
@@ -241,26 +251,26 @@ h4 {
   flex-wrap: wrap;
   gap: 15px;
 }
-#contestant {
+.contestant {
   height: 332px;
   width: 250px;
   padding: 8px;
   border-radius: 15px;
   border: 2px solid var(--gold-color);
 }
-#contestant > img {
+.contestant > img {
   width: 250px;
   height: 250px;
   object-fit: cover;
   border-radius: 14px 14px 0 0;
 }
-#contestant-name {
+.contestant-name {
   margin-top: 10px;
   width: 100%;
   margin-bottom: 0;
   padding: 0 10px;
 }
-#vote {
+.vote {
   /* margin:  8px auto; */
   /* margin-bottom: 0; */
   margin-top: 8px;

@@ -1,48 +1,31 @@
 import React from "react";
+// import { Link } from "react-router-dom";
 import "./Home.css";
+import "./vote.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import Vote from "./Vote";
 
 class Categories extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
     this.state = {
-      contestant: [],
-
       isModelActive: true,
       isInfluencerActive: false,
       isLifetimeActive: false,
       isSchoolActive: false,
+      voteModal: false,
+      contestant: "",
     };
     this.handleModelIconChange = this.handleModelIconChange.bind(this);
     this.handleLifetimeIconChange = this.handleLifetimeIconChange.bind(this);
     this.handleInfluencerIconChange =
       this.handleInfluencerIconChange.bind(this);
     this.handleSchoolIconChange = this.handleSchoolIconChange.bind(this);
-  }
-  componentDidMount() {
-    const getContestant = async () => {
-      const res = await axios.get("http://localhost:2009/api/v1/contestant");
-      this.setState({ contestant: res.data.data.data });
-
-      //   res.data.data.data.map((contestant) => {
-      //     console.log(contestant.category);
-      //     if (contestant.category === "fashion-influencer-of-the-year") {
-      //       this.setState({ influencer: [...contestant] });
-      //     } else if (contestant.category === "fashion-model-of-the-year") {
-      //       this.setState({ model: [...contestant] });
-      //     } else if (
-      //       contestant.category === "fashion-lifetime-achievement-award"
-      //     ) {
-      //       this.setState({ lifetime: [...contestant] });
-      //     } else if (contestant.category === "fashion-school-of-the-year") {
-      //       this.setState({ school: [...contestant] });
-      //     }
-      //   });
-    };
-    getContestant();
+    this.voteUser = this.voteUser.bind(this);
+    this.handleContestant = this.handleContestant.bind(this);
+    this.voteOnClick = this.voteOnClick.bind(this);
   }
 
   handleModelIconChange() {
@@ -83,25 +66,55 @@ class Categories extends React.Component {
     });
   }
 
+  voteOnClick(contestant) {
+    this.handleContestant(contestant);
+    this.voteUser();
+  }
+  handleContestant(contestant) {
+    this.setState({ contestant: contestant });
+    // this.voteUser();
+  }
+
+  voteUser() {
+    this.setState((state) => {
+      if (state.voteModal) {
+        return { voteModal: false };
+      } else {
+        return { voteModal: true };
+      }
+    });
+    console.log(this.state.voteModal);
+  }
+
   render() {
-    const allContestant = (category) => {
-      return this.state.contestant.map((contestant) => {
-        if (contestant.category === category) {
-          return (
-            <div id="contestant" key={contestant.id}>
-              <img src={contestant.photo} alt="" loading="lazy" />
-              <div id="contestants-name">
-                <h3 id="contestant-name">{contestant.name}</h3>
-                <button id="vote">Vote</button>
-              </div>
-            </div>
-          );
-        }
-      });
-    };
+    // const allContestant = (category) => {
+    //   this.state.contestant &&
+    //     this.state.contestant.map((contestant) => {
+    //       if (contestant.category === category) {
+    //         return (
+    //           <div id="contestant" key={contestant.id}>
+    //             <img src={contestant.photo} alt="" loading="lazy" />
+    //             <div id="contestants-name">
+    //               <h3 id="contestant-name">{contestant.name}</h3>
+    //               <button
+    //                 id="vote"
+    //                 onClick={this.handleContestantName(contestant.name)}
+    //               >
+    //                 Vote
+    //               </button>
+    //             </div>
+    //           </div>
+    //         );
+    //       }
+    //     });
+    // };
 
     return (
       <div>
+        {this.state.voteModal && (
+          <Vote contestant={this.state.contestant} voteUser={this.voteUser} />
+        )}
+
         <section id="categories">
           <h1 id="categories-text">CATEGORIES</h1>
           <div id="categories-content">
@@ -123,7 +136,29 @@ class Categories extends React.Component {
                   />
                 </div>
                 <div id="category-contestants">
-                  {allContestant("fashion-model-of-the-year")}
+                  {/* {allContestant("fashion-model-of-the-year")} */}
+                  {this.props.contestant.map((contestant) => {
+                    return contestant.category ===
+                      "fashion-model-of-the-year" ? (
+                      <div className="contestant" key={contestant._id}>
+                        <img src={contestant.photo} alt="" loading="lazy" />
+                        <div className="contestants-name">
+                          <h3 className="contestant-name">{contestant.name}</h3>
+                          <button
+                            className="vote"
+                            id={contestant._id}
+                            onClick={() => this.voteOnClick(contestant)}
+                            // onClick={this.handleContestantName.bind(
+                            //   this,
+                            //   contestant
+                            // )}
+                          >
+                            Vote
+                          </button>
+                        </div>
+                      </div>
+                    ) : null;
+                  })}
                 </div>
               </div>
             ) : (
@@ -177,7 +212,29 @@ class Categories extends React.Component {
                   />
                 </div>
                 <div id="category-contestants">
-                  {allContestant("fashion-lifetime-achievement-award")}
+                  {/* {allContestant("fashion-lifetime-achievement-award")} */}
+                  {this.props.contestant.map((contestant) => {
+                    return contestant.category ===
+                      "fashion-lifetime-achievement-award" ? (
+                      <div className="contestant" key={contestant._id}>
+                        <img src={contestant.photo} alt="" loading="lazy" />
+                        <div className="contestants-name">
+                          <h3 className="contestant-name">{contestant.name}</h3>
+                          <button
+                            className="vote"
+                            id={contestant._id}
+                            onClick={() => this.voteOnClick(contestant)}
+                            // onClick={this.handleContestantName.bind(
+                            //   this,
+                            //   contestant
+                            // )}
+                          >
+                            Vote
+                          </button>
+                        </div>
+                      </div>
+                    ) : null;
+                  })}
                 </div>
               </div>
             )}
@@ -201,7 +258,7 @@ class Categories extends React.Component {
                 <div id="category-layer">
                   <div id="category-identifier">
                     <div id="category-number">
-                      <h4>2</h4>
+                      <h4>3</h4>
                     </div>
                     <h2 id="category-name">FASHION INFLUENCER OF THE YEAR</h2>
                   </div>
@@ -212,7 +269,29 @@ class Categories extends React.Component {
                   />
                 </div>
                 <div id="category-contestants">
-                  {allContestant("fashion-influencer-of-the-year")}
+                  {/* {allContestant("fashion-influencer-of-the-year")} */}
+                  {this.props.contestant.map((contestant) => {
+                    return contestant.category ===
+                      "fashion-influencer-of-the-year" ? (
+                      <div className="contestant" key={contestant._id}>
+                        <img src={contestant.photo} alt="" loading="lazy" />
+                        <div className="contestants-name">
+                          <h3 className="contestant-name">{contestant.name}</h3>
+                          <button
+                            className="vote"
+                            id={contestant._id}
+                            onClick={() => this.voteOnClick(contestant)}
+                            // onClick={this.handleContestantName.bind(
+                            //   this,
+                            //   contestant
+                            // )}
+                          >
+                            Vote
+                          </button>
+                        </div>
+                      </div>
+                    ) : null;
+                  })}
                 </div>
               </div>
             )}
@@ -236,7 +315,7 @@ class Categories extends React.Component {
                 <div id="category-layer">
                   <div id="category-identifier">
                     <div id="category-number">
-                      <h4>2</h4>
+                      <h4>4</h4>
                     </div>
                     <h2 id="category-name">FASHION SCHOOL OF THE YEAR</h2>
                   </div>
@@ -247,7 +326,29 @@ class Categories extends React.Component {
                   />
                 </div>
                 <div id="category-contestants">
-                  {allContestant("fashion-school-of-the-year")}
+                  {/* {allContestant("fashion-school-of-the-year")} */}
+                  {this.props.contestant.map((contestant) => {
+                    return contestant.category ===
+                      "fashion-school-of-the-year" ? (
+                      <div className="contestant" key={contestant._id}>
+                        <img src={contestant.photo} alt="" loading="lazy" />
+                        <div className="contestants-name">
+                          <h3 className="contestant-name">{contestant.name}</h3>
+                          <button
+                            className="vote"
+                            id={contestant._id}
+                            onClick={() => this.voteOnClick(contestant)}
+                            // onClick={this.handleContestantName.bind(
+                            //   this,
+                            //   contestant
+                            // )}
+                          >
+                            Vote
+                          </button>
+                        </div>
+                      </div>
+                    ) : null;
+                  })}
                 </div>
               </div>
             )}

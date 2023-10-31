@@ -7,15 +7,27 @@ import {
   faXTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { faPlus, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import heroPhoto1 from "../img/good-faces-xmSWVeGEnJw-unsplash.jpg";
 import heroPhoto2 from "../img/romario-roges-Q60IoafRrPo-unsplash.jpg";
 import Categories from "./Categories";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
+    this.state = {
+      contestant: [],
+    };
+  }
+  componentDidMount() {
+    const getContestant = async () => {
+      const res = await axios.get("http://localhost:2009/api/v1/contestant");
+      this.setState({ contestant: res.data.data.data });
+    };
+    getContestant();
   }
   render() {
     return (
@@ -73,11 +85,13 @@ class Home extends React.Component {
               />
             </div>
           </div>
-          <h1 id="hero-text">
-            THE PERFECT PLATFORM TO SHINE AND STAND-OUT BEFORE THE WORLD
-          </h1>
+          <div id="hero-text-div">
+            <h1 id="hero-text">
+              THE PERFECT PLATFORM TO SHINE AND STAND-OUT BEFORE THE WORLD
+            </h1>
+          </div>
         </section>
-        <Categories />
+        <Categories contestant={this.state.contestant} />
 
         <section id="contact">
           <div className="contact-links">

@@ -25,7 +25,8 @@ class CreateContestants extends React.Component {
     formData.append("name", `${e.target.form[0].value}`);
     formData.append("category", `${e.target.form[1].value}`);
     formData.append("photo", this.state.photo[0]);
-    console.log(e.target.form[2].files[0]);
+    // console.log(e.target.form[2].files[0]);
+    // console.log(Cookies.get("jwt"));
 
     const res = await axios.post(
       "http://localhost:2009/api/v1/contestant",
