@@ -64,6 +64,25 @@
   justify-content: space-between;
   font-family: manrope;
 }
+#checkout-modal input {
+  display: block;
+  margin: 5px 0;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 20px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  background-color: color-mix(in srgb, var(--white-color), transparent 90%);
+  border: 1px solid grey;
+  border-radius: 4px;
+  color: var(--white-color);
+}
+#vote-number {
+  width: 100%;
+  height: 30px;
+  padding-left: 5px;
+  box-sizing: border-box;
+}
 
 #checkout {
   width: 100%;
@@ -83,47 +102,59 @@
   background-color: var(--black-color);
 }
 
-#card-expiry-div {
-  width: 30%;
+#expiry-cvc-label {
+  height: 40px;
+  width: 60%;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-#expiry-cvc-div {
-  height: 40px;
+#card-expiry-div {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#cvc-div {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-#expiry-cvc-label {
-  display: flex;
-  justify-content: space-between;
-  width: 47%;
+#expiry {
+  width: 100%;
+}
+
+#cvc {
+  width: 100%;
 }
 
 #card-expiry-month {
   width: 2.5rem;
   margin-right: 6px;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 5px;
 }
 
 #card-expiry-year {
   width: 2.5rem;
   margin-left: 6px;
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 0;
 }
 
 #card-expiry-seperator {
   font-size: 1.2rem;
   margin: 0;
+  margin-top: -10px;
 }
 
 #card-cvc {
   margin: 0;
-  width: 7rem;
+  margin-top: 5px;
+  /* width: 6rem; */
 }
 #pay-button {
   margin-top: 20px;
@@ -135,8 +166,38 @@
   font-size: 1rem;
   letter-spacing: 2px;
 }
+#card-name::placeholder {
+  font-size: 0.8rem;
+}
 
 #checkout-modal label {
   font-family: manrope;
   font-size: 0.7rem;
+}
+
+@media screen and (max-width: 480px) {
+  #modal-div {
+    width: 75%;
+    height: 25rem;
+    border: 2px solid var(--gold-color);
+    padding: 30px 40px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--black-color);
+  }
+  #vote-number {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+    box-sizing: border-box;
+  }
+  #checkout-modal {
+    width: 75%;
+    height: 400px;
+    border: 2px solid var(--gold-color);
+    padding: 30px 40px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: var(--black-color);
+  }
 }

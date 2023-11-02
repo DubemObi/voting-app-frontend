@@ -68,7 +68,7 @@ class Vote extends React.Component {
     // console.log(Cookies.get("jwt"));
 
     const res = await axios.post(
-      `http://localhost:2009/api/v1/vote/checkout/${this.props.contestant._id}`,
+      `https://voting-app-jzna.onrender.com/api/v1/vote/checkout/${this.props.contestant._id}`,
       formData,
       {
         headers: {
@@ -92,6 +92,7 @@ class Vote extends React.Component {
               id="card-name"
               value={this.state.fullname}
               onChange={this.fullnameChange}
+              placeholder="Card Name"
               required
             />
             <label htmlFor="card-number">Card Number</label>
@@ -101,37 +102,45 @@ class Vote extends React.Component {
               placeholder="---- ---- ---- ----"
               value={this.state.cardNumber}
               onChange={this.cardNumberChange}
+              maxLength="16"
               required
             />
             <div id="expiry-cvc-label">
-              <label htmlFor="card-expiry-month">Expiry Date</label>
-              <label htmlFor="card-cvc">CVC/CVV</label>
-            </div>
-            <div id="expiry-cvc-div">
-              <div id="card-expiry-div">
-                <input
-                  type="text"
-                  id="card-expiry-month"
-                  value={this.state.expiryMonth}
-                  onChange={this.expiryMonthChange}
-                  required
-                />
-                <p id="card-expiry-seperator">/</p>
-                <input
-                  type="text"
-                  id="card-expiry-year"
-                  value={this.state.expiryYear}
-                  onChange={this.expiryYearChange}
-                  required
-                />
+              <div id="expiry">
+                <label htmlFor="card-expiry-month">Expiry Date</label>
+                <div id="card-expiry-div">
+                  <input
+                    type="text"
+                    id="card-expiry-month"
+                    value={this.state.expiryMonth}
+                    onChange={this.expiryMonthChange}
+                    maxLength={2}
+                    required
+                  />
+                  <p id="card-expiry-seperator">/</p>
+                  <input
+                    type="text"
+                    id="card-expiry-year"
+                    value={this.state.expiryYear}
+                    onChange={this.expiryYearChange}
+                    maxLength={2}
+                    required
+                  />
+                </div>
               </div>
-              <input
-                type="text"
-                id="card-cvc"
-                value={this.state.cvv}
-                onChange={this.cvvChange}
-                required
-              />
+              <div id="cvc">
+                <label htmlFor="card-cvc">CVC/CVV</label>
+                <div id="cvc-div">
+                  <input
+                    type="text"
+                    id="card-cvc"
+                    value={this.state.cvv}
+                    onChange={this.cvvChange}
+                    maxLength={3}
+                    required
+                  />
+                </div>
+              </div>
             </div>
             <button id="pay-button" onClick={this.checkoutHandler}>
               Pay

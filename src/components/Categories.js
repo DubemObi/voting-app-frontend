@@ -110,7 +110,7 @@ class Categories extends React.Component {
     // };
 
     return (
-      <div>
+      <div className="categories-div">
         {this.state.voteModal && (
           <Vote contestant={this.state.contestant} voteUser={this.voteUser} />
         )}

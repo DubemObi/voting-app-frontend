@@ -7,7 +7,7 @@ import {
   faXTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import heroPhoto1 from "../img/good-faces-xmSWVeGEnJw-unsplash.jpg";
 import heroPhoto2 from "../img/romario-roges-Q60IoafRrPo-unsplash.jpg";
 import Categories from "./Categories";
@@ -20,18 +20,66 @@ class Home extends React.Component {
     this.props = props;
     this.state = {
       contestant: [],
+      isMenu: false,
     };
+    this.handleMenu = this.handleMenu.bind(this);
   }
   componentDidMount() {
     const getContestant = async () => {
-      const res = await axios.get("http://localhost:2009/api/v1/contestant");
+      const res = await axios.get(
+        "https://voting-app-jzna.onrender.com/api/v1/contestant"
+      );
       this.setState({ contestant: res.data.data.data });
     };
     getContestant();
   }
+  handleMenu() {
+    this.setState((state) => {
+      if (!state.isMenu) {
+        return { isMenu: true };
+      } else {
+        return { isMenu: false };
+      }
+    });
+  }
   render() {
+    const menuBar = (
+      <div id="full-menubar">
+        <div id="menubar">
+          <FontAwesomeIcon
+            icon={faXmark}
+            id="menubar-icon"
+            onClick={this.handleMenu}
+          />
+          <ul id="new-nav-links">
+            <a href="#hero" onClick={this.handleMenu}>
+              <li>Home</li>
+            </a>
+            <a href="#categories" onClick={this.handleMenu}>
+              <li>Categories</li>
+            </a>
+            <a href="" onClick={this.handleMenu}>
+              <li>About Us</li>
+            </a>
+            <a href="#contact" onClick={this.handleMenu}>
+              <li>Contact</li>
+            </a>
+          </ul>
+        </div>
+        <div id="behind-menubar" onClick={this.handleMenu}></div>
+      </div>
+    );
     return (
       <div className="home">
+        {this.state.isMenu ? menuBar : !menuBar}
+        <nav id="navbar-phone">
+          <h1 id="logo-text">VIZI</h1>
+          <FontAwesomeIcon
+            icon={faBars}
+            id="nav-icon"
+            onClick={this.handleMenu}
+          />
+        </nav>
         <nav id="navbar">
           <h1 id="logo-text">VIZI</h1>
           <ul id="nav-links">
@@ -50,11 +98,11 @@ class Home extends React.Component {
           </ul>
           {!this.props.userAccount.data ? (
             <div id="signin-options">
-              <a href="/login" id="login">
+              <a href="/login" id="login-button">
                 Login
               </a>
               <a href="/signup">
-                <button id="signup">Sign up</button>
+                <button id="signup-button">Sign up</button>
               </a>
             </div>
           ) : (
@@ -116,19 +164,23 @@ class Home extends React.Component {
             <p>Feedbacks</p>
           </div>
           <div id="find-us">
-            <h3>FIND US ON</h3>
-            <div id="find-us-icons">
-              <FontAwesomeIcon icon={faFacebookF} className="fu-icon" />
-              <FontAwesomeIcon icon={faXTwitter} className="fu-icon" />
-              <FontAwesomeIcon icon={faInstagram} className="fu-icon" />
-              <FontAwesomeIcon icon={faYoutube} className="fu-icon" />
+            <div>
+              <h3>FIND US ON</h3>
+              <div id="find-us-icons">
+                <FontAwesomeIcon icon={faFacebookF} className="fu-icon" />
+                <FontAwesomeIcon icon={faXTwitter} className="fu-icon" />
+                <FontAwesomeIcon icon={faInstagram} className="fu-icon" />
+                <FontAwesomeIcon icon={faYoutube} className="fu-icon" />
+              </div>
             </div>
-            <h3>SUBSCRIBE</h3>
-            <input
-              type="email"
-              placeholder="Enter your e-mail here"
-              id="email"
-            />
+            <div>
+              <h3>SUBSCRIBE</h3>
+              <input
+                type="email"
+                placeholder="Enter your e-mail here"
+                id="email"
+              />
+            </div>
           </div>
         </section>
         <p id="copyright">&copy; Copyright Dubem</p>

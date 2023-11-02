@@ -29,7 +29,7 @@ class CreateContestants extends React.Component {
     // console.log(Cookies.get("jwt"));
 
     const res = await axios.post(
-      "http://localhost:2009/api/v1/contestant",
+      "https://voting-app-jzna.onrender.com/api/v1/contestant",
       formData,
       {
         headers: {

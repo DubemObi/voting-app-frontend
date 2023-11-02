@@ -43,27 +43,22 @@ class Signup extends React.Component {
         <div id="main-body">
           <div id="form-container-signup">
             <h1 id="signup-text">Signup</h1>
-            <form
-              // action={this.signupUser}
-              id="signup-form"
-              // method="post"
-              autoComplete="on"
-            >
+            <form id="signup-form" autoComplete="on">
               <label htmlFor="name">
                 Name
-                <input type="text" name="name" required/>
+                <input type="text" name="name" required />
               </label>
               <label htmlFor="email">
                 Email
-                <input type="email" name="email"required />
+                <input type="email" name="email" required />
               </label>
               <label htmlFor="password">
                 Password
-                <input type="password" name="password" required/>
+                <input type="password" name="password" required />
               </label>
               <label htmlFor="confirm-password">
                 Confirm Password
-                <input type="password" name="confirm-password" required/>
+                <input type="password" name="confirm-password" required />
               </label>
               <button type="submit" onClick={this.props.signupUser}>
                 Sign up

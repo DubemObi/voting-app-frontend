@@ -26,6 +26,9 @@
 .home {
   font-family: merchant;
 }
+#navbar-phone {
+  display: none;
+}
 #navbar {
   background-color: var(--white-color);
   padding-right: 80px;
@@ -75,13 +78,13 @@
   align-items: center;
   gap: 15px;
 }
-#login {
+#login-button {
   font-family: manrope;
   color: var(--black-color);
   text-decoration: none;
   font-weight: bold;
 }
-#signup {
+#signup-button {
   margin: 0;
   height: 38px;
   background-color: var(--gold-color);
@@ -328,4 +331,309 @@ h4 {
 .fu-icon {
   font-size: 1.3rem;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 480px) {
+  #navbar-phone {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white-color);
+    padding-right: 30px;
+    padding-left: 30px;
+    width: 100vw;
+    height: 80px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  #navbar {
+    display: none;
+  }
+
+  #nav-icon {
+    font-size: 1.4rem;
+  }
+  #full-menubar {
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    /* display: none; */
+  }
+  #menubar {
+    height: 100vh;
+    width: 45vw;
+    background-color: var(--gold-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    /* display: none; */
+  }
+  #menubar-icon {
+    font-size: 1.8rem;
+    color: var(--black-color);
+    float: right;
+    margin-right: 12px;
+    margin-top: 20px;
+  }
+  #new-nav-links {
+    margin-top: 70px;
+    padding-left: 0;
+    list-style: none;
+    border-top: 1px solid var(--purple-color);
+  }
+  #new-nav-links a {
+    text-decoration: none;
+  }
+  #new-nav-links li {
+    height: 40px;
+    font-size: 1.1rem;
+    padding-left: 20px;
+    border-bottom: 1px solid var(--purple-color);
+    display: flex;
+    align-items: center;
+    color: var(--black-color);
+  }
+
+  #behind-menubar {
+    width: 100vw;
+    height: 100vh;
+    background-color: color-mix(in srgb, var(--black-color), transparent 50%);
+  }
+  #hero {
+    margin-top: 80px;
+    height: calc(100vh - 80px);
+    width: 100%;
+    background-color: var(--black-color);
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #hero-photos {
+    /* margin: 0 30px; */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  #photo-container1 {
+    width: 50%;
+  }
+  #photo-container2 {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 30px;
+    /* margin-left: 30px; */
+  }
+  #hero-photo1 {
+    width: 250px;
+  }
+  #hero-photo2 {
+    width: 300px;
+    /* margin-left: 50px; */
+  }
+
+  #hero-text-div {
+    width: 100%;
+    height: calc(100vh - 80px);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #hero-text {
+    font-size: 3.35rem;
+    width: 75%;
+    color: var(--white-color);
+    /* position: absolute;
+    top: 20%;
+    left: 21%; */
+    overflow: hidden;
+    font-family: merchant;
+    font-weight: 400;
+    border: 2px solid var(--gold-color);
+    padding: 20px 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  /* .categories-div {
+    display: block;
+  } */
+  #categories {
+    background-color: var(--black-color);
+    width: 100%;
+    padding: 70px 25px;
+    padding-bottom: 120px;
+    color: var(--white-color);
+    box-sizing: border-box;
+  }
+
+  #categories-text {
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: var(--gold-color);
+    text-align: center;
+  }
+
+  #categories-content {
+    width: 95%;
+    margin-left: 0px;
+    padding-top: 20px;
+  }
+
+  hr {
+    border-color: var(--gold-color);
+  }
+
+  #category-layer {
+    height: 70px;
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #category-identifier {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #category-number {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    margin-right: 20px;
+    font-size: 0.9rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--white-color);
+  }
+  #category-name {
+    font-size: 1.2rem;
+    line-height: 1.2;
+  }
+
+  h2,
+  h4 {
+    font-weight: 500;
+  }
+
+  #category-icon {
+    font-size: 1.4rem;
+  }
+
+  #category-contestants {
+    width: 100%;
+    padding: 30px 42px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .contestant {
+    height: 332px;
+    width: 250px;
+    padding: 8px;
+    border-radius: 15px;
+    border: 2px solid var(--gold-color);
+  }
+  .contestant > img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 14px 14px 0 0;
+  }
+  .contestant-name {
+    margin-top: 10px;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0 10px;
+  }
+  .vote {
+    /* margin:  8px auto; */
+    /* margin-bottom: 0; */
+    margin-top: 8px;
+    margin-left: 10px;
+    width: 100px;
+    height: 35px;
+  }
+
+  #contact {
+    height: 280px;
+    width: 100%;
+    background-color: var(--grey-color);
+    padding: 40px 25px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    /* padding-top: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-family: manrope;
+  }
+  .contact-links {
+    width: 87px;
+  }
+  #contact p {
+    font-size: 0.75rem;
+    margin-top: 0;
+    margin-bottom: 7px;
+    /* color: var(--grey-color); */
+  }
+  #contact h3 {
+    margin-top: 0px;
+    margin-bottom: 7px;
+    font-size: 1rem;
+    color: var(--gold-color);
+  }
+
+  #find-us {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  #find-us h3 {
+    margin-top: 10px;
+    /* margin-bottom: 5px; */
+    padding-bottom: 7px;
+  }
+
+  #email {
+    width: 200px;
+    height: 32px;
+    border-radius: 4px;
+    margin-top: -14px;
+    padding: 5px;
+    box-sizing: border-box;
+    color: var(--black-color);
+  }
+
+  #copyright {
+    background-color: var(--grey-color);
+    margin: 0;
+    padding: 20px 0;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    font-family: manrope;
+  }
+  #find-us-icons {
+    margin-top: -10px;
+    /* margin-left: 5px; */
+  }
+
+  .fu-icon {
+    font-size: 1.3rem;
+    margin-right: 10px;
+  }
 }
