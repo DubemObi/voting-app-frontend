@@ -50,15 +50,12 @@ function App() {
         if (user.status === "success") {
           setIsLoggedIn(true);
           setUserAccount(user);
-          // console.log(user.data.user.email);
-          // const SetCookie = () => {
+      
           Cookies.set("jwt", `${user.token}`, {
             expires: 3,
           });
           // alert(Cookies.get("jwt"));
           setCookies(Cookies.get());
-
-          // };
         }
       });
   };

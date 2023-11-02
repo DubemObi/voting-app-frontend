@@ -200,4 +200,11 @@
     border-radius: 20px;
     background-color: var(--black-color);
   }
+  #expiry-cvc-label {
+    height: 40px;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
 }

@@ -12,7 +12,6 @@ import heroPhoto1 from "../img/good-faces-xmSWVeGEnJw-unsplash.jpg";
 import heroPhoto2 from "../img/romario-roges-Q60IoafRrPo-unsplash.jpg";
 import Categories from "./Categories";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 class Home extends React.Component {
   constructor(props) {
@@ -65,6 +64,14 @@ class Home extends React.Component {
               <li>Contact</li>
             </a>
           </ul>
+          <div id="signin-options">
+            <a href="/login" id="login-button">
+              Login
+            </a>
+            <a href="/signup">
+              <button id="signup-button">Sign up</button>
+            </a>
+          </div>
         </div>
         <div id="behind-menubar" onClick={this.handleMenu}></div>
       </div>
@@ -174,7 +181,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div>
-              <h3>SUBSCRIBE</h3>
+              <h3 id="subscribe">SUBSCRIBE</h3>
               <input
                 type="email"
                 placeholder="Enter your e-mail here"
