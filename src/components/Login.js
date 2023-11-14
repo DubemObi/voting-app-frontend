@@ -2,6 +2,7 @@ import React from "react";
 import "./Login.css";
 import { Navigate } from "react-router-dom";
 import bigImage from "../img/emmanuel-ikwuegbu-hPjE8wgpTPE-unsplash.jpg";
+import Alert from "./Alert";
 
 class Login extends React.Component {
   constructor(props) {
@@ -29,7 +30,6 @@ class Login extends React.Component {
   //     .then((user) => {
   //       if (user.status === "success") {
   //         this.setState({ isLoggedIn: true });
-  //         console.log(user);
   //       }
   //     });
   // };
@@ -41,19 +41,36 @@ class Login extends React.Component {
 
         <img src={bigImage} alt="dark ladies" id="image" loading="lazy" />
         <div id="main-body">
+          <Alert
+            alert={this.props.alert}
+            handleAlert={this.props.handleAlert}
+            message={
+              this.props.alert === "success"
+                ? "You have successfully logged in!"
+                : this.props.alert === "error"
+                ? "Login failed! Enter correct email and password"
+                : ""
+            }
+          />
           <div id="form-container">
             <h1 id="login-text">Login</h1>
             <form method="POST">
               <label htmlFor="email">
                 Email
-                <input type="email" name="email" required/>
+                <input type="email" name="email" required />
               </label>
               <label htmlFor="password">
                 Password
-                <input type="password" name="password" required/>
+                <input type="password" name="password" required />
               </label>
-              <button type="submit" onClick={this.props.loginUser}>
-                Login
+              <button
+                type="submit"
+                onClick={this.props.loginUser}
+                style={{
+                  backgroundColor: `${this.props.loader ? "#F6D7BB" : ""}`,
+                }}
+              >
+                Login <div id={this.props.loader ? "button-loader" : ""}></div>
               </button>
             </form>
           </div>

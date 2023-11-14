@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./CreateContestants.css";
 import Cookies from "js-cookie";
-import { Navigate } from "react-router-dom";
+import Alert from "./Alert";
 
 class CreateContestants extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class CreateContestants extends React.Component {
     this.setState({ photo: [e.target.form[2].files[0]] });
   }
   async createContestant(e) {
+    this.props.handleLoader();
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", `${e.target.form[0].value}`);
@@ -27,19 +28,29 @@ class CreateContestants extends React.Component {
     formData.append("photo", this.state.photo[0]);
     // console.log(e.target.form[2].files[0]);
     // console.log(Cookies.get("jwt"));
-
-    const res = await axios.post(
-      "https://voting-app-jzna.onrender.com/api/v1/contestant",
-      formData,
-      {
-        headers: {
-          "Content-type": "multipart/form-data",
-          Authorization: `Bearer: ${Cookies.get("jwt")}`,
-          Accept: "*/*",
-        },
+    try {
+      const res = await axios.post(
+        "https://voting-app-jzna.onrender.com/api/v1/contestant",
+        formData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+            Authorization: `Bearer: ${Cookies.get("jwt")}`,
+            Accept: "*/*",
+          },
+        }
+      );
+      if (res) {
+        this.props.handleLoader();
+        if (res.data.status === "success") {
+          this.props.handleAlert("success");
+        } else {
+          this.props.handleAlert("error");
+        }
       }
-    );
-    console.log(res);
+    } catch (error) {
+      this.props.handleAlert("error");
+    }
     // fetch("http://localhost:2009/api/v1/contestant", {
     // fetch("https://voting-app-jzna.onrender.com/api/v1/contestant", {
     //   method: "POST",
@@ -69,11 +80,22 @@ class CreateContestants extends React.Component {
   render() {
     return (
       <div id="create-contestants">
+        <Alert
+          alert={this.props.alert}
+          handleAlert={this.props.handleAlert}
+          message={
+            this.props.alert === "success"
+              ? "You have successfully created a contestant!"
+              : this.props.alert === "error"
+              ? "Failed to create contentant! "
+              : ""
+          }
+        />
         {/* {this.props.isLoggedIn && <Navigate to="/" replace={true} />} */}
         <form action="" id="contestants-form">
           <h1 id="add-text">Add Contestant</h1>
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" />
+          <input type="text" name="name" id="name" required />
           <label htmlFor="category">Category</label>
           <select name="category" id="category" required>
             <option value="--">Select an option</option>
@@ -91,9 +113,15 @@ class CreateContestants extends React.Component {
             </option>
           </select>
           <label htmlFor="image">Photo</label>
-          <input type="file" onChange={this.handlePhotoChange} />
-          <button id="submit-contestant" onClick={this.createContestant}>
-            Submit
+          <input type="file" onChange={this.handlePhotoChange} required />
+          <button
+            id="submit-contestant"
+            onClick={this.createContestant}
+            style={{
+              backgroundColor: `${this.props.loader ? "#F6D7BB" : ""}`,
+            }}
+          >
+            Submit <div id={this.props.loader ? "button-loader" : ""}></div>
           </button>
         </form>
         <div id="background-tint"></div>

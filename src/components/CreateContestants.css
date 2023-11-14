@@ -52,13 +52,19 @@
   height: 30px;
   box-sizing: border-box;
   margin-bottom: 20px;
+  border-radius: 4px;
+  background-color: color-mix(in srgb, var(--white-color), transparent 90%);
+  border: 1px solid grey;
+  color: var(--white-color);
 }
 
 select {
   height: 30px;
   margin-bottom: 15px;
   width: 100%;
+  border-radius: 4px;
   padding: 5px;
+  border: 1px solid grey;
 }
 
 #submit-contestant {
@@ -69,6 +75,23 @@ select {
   background-color: var(--gold-color);
   border: none;
   font-size: 0.9rem;
+}
+
+#create-contestants .alert {
+  width: 40%;
+  height: 50px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 70px;
+  right: 30%;
+  background-color: lightgreen;
+  color: var(--black-color);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 480px) {
@@ -96,6 +119,16 @@ select {
     padding: 40px 40px;
     box-sizing: border-box;
   }
+  #create-contestants .alert {
+    width: 80%;
+    height: 50px;
+    top: 15vh;
+    right: 10%;
+  }
+  #create-contestants .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
 }
 
 @media screen and (min-width: 610px) and (max-width: 850px) {
@@ -110,6 +143,16 @@ select {
     padding: 40px 40px;
     box-sizing: border-box;
   }
+  #create-contestants .alert {
+    width: 55%;
+    height: 50px;
+    top: 70px;
+    right: 22.5%;
+  }
+  #create-contestants .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 610px) {
@@ -123,5 +166,15 @@ select {
     z-index: 2;
     padding: 40px 40px;
     box-sizing: border-box;
+  }
+  #create-contestants .alert {
+    width: 70%;
+    height: 50px;
+    top: 70px;
+    right: 15%;
+  }
+  #create-contestants .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
   }
 }

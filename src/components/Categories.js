@@ -72,7 +72,6 @@ class Categories extends React.Component {
   }
   handleContestant(contestant) {
     this.setState({ contestant: contestant });
-    // this.voteUser();
   }
 
   voteUser() {
@@ -83,7 +82,6 @@ class Categories extends React.Component {
         return { voteModal: true };
       }
     });
-    console.log(this.state.voteModal);
   }
 
   render() {
@@ -112,7 +110,14 @@ class Categories extends React.Component {
     return (
       <div className="categories-div">
         {this.state.voteModal && (
-          <Vote contestant={this.state.contestant} voteUser={this.voteUser} />
+          <Vote
+            contestant={this.state.contestant}
+            voteUser={this.voteUser}
+            loader={this.props.loader}
+            alert={this.props.alert}
+            handleAlert={this.props.handleAlert}
+            handleLoader={this.props.handleLoader}
+          />
         )}
 
         <section id="categories">

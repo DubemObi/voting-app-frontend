@@ -11,7 +11,17 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userAccount, setUserAccount] = useState({});
   const [cookies, setCookies] = useState("");
+  const [loader, setLoader] = useState(false);
+  const [alert, setAlert] = useState("");
+
+  const handleAlert = (state) => {
+    setAlert(state);
+  };
+  const handleLoader = () => {
+    setLoader((s) => !s);
+  };
   const signupUser = (e) => {
+    handleLoader();
     e.preventDefault();
     fetch("https://voting-app-jzna.onrender.com/api/v1/user/signup", {
       method: "POST",
@@ -27,13 +37,18 @@ function App() {
     })
       .then((response) => response.json())
       .then((user) => {
+        handleLoader();
         if (user.status === "success") {
           setIsLoggedIn(true);
           setUserAccount(user);
+          handleAlert("success");
+        } else {
+          handleAlert("error");
         }
       });
   };
   const loginUser = (e) => {
+    handleLoader();
     e.preventDefault();
     fetch("https://voting-app-jzna.onrender.com/api/v1/user/login", {
       method: "POST",
@@ -47,30 +62,50 @@ function App() {
     })
       .then((response) => response.json())
       .then((user) => {
+        handleLoader();
         if (user.status === "success") {
           setIsLoggedIn(true);
           setUserAccount(user);
-      
+          handleAlert("success");
+
           Cookies.set("jwt", `${user.token}`, {
             expires: 3,
           });
           // alert(Cookies.get("jwt"));
           setCookies(Cookies.get());
+        } else {
+          handleAlert("error");
         }
       });
   };
-  console.log(cookies.jwt);
+  // console.log(cookies.jwt);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           exact
           path="/"
-          element={<Home userAccount={userAccount} />}
+          element={
+            <Home
+              userAccount={userAccount}
+              loader={loader}
+              alert={alert}
+              handleAlert={handleAlert}
+              handleLoader={handleLoader}
+            />
+          }
         ></Route>
         <Route
           path="signup"
-          element={<Signup signupUser={signupUser} isLoggedIn={isLoggedIn} />}
+          element={
+            <Signup
+              signupUser={signupUser}
+              isLoggedIn={isLoggedIn}
+              loader={loader}
+              alert={alert}
+              handleAlert={handleAlert}
+            />
+          }
         />
         <Route
           path="login"
@@ -79,12 +114,23 @@ function App() {
               loginUser={loginUser}
               isLoggedIn={isLoggedIn}
               userCookies={cookies}
+              loader={loader}
+              alert={alert}
+              handleAlert={handleAlert}
             />
           }
         />
         <Route
           path="contestant"
-          element={<CreateContestants userCookies={cookies} />}
+          element={
+            <CreateContestants
+              userCookies={cookies}
+              loader={loader}
+              alert={alert}
+              handleAlert={handleAlert}
+              handleLoader={handleLoader}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>

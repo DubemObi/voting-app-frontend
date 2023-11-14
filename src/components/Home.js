@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faUser, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import heroPhoto1 from "../img/good-faces-xmSWVeGEnJw-unsplash.jpg";
-import heroPhoto2 from "../img/romario-roges-Q60IoafRrPo-unsplash.jpg";
+import heroPhoto2 from "../img/romario-roges-Q60IoafRrPo-unsplash-1.jpg";
 import Categories from "./Categories";
 import axios from "axios";
 
@@ -146,7 +146,13 @@ class Home extends React.Component {
             </h1>
           </div>
         </section>
-        <Categories contestant={this.state.contestant} />
+        <Categories
+          contestant={this.state.contestant}
+          loader={this.props.loader}
+          alert={this.props.alert}
+          handleAlert={this.props.handleAlert}
+          handleLoader={this.props.handleLoader}
+        />
 
         <section id="contact">
           <div className="contact-links">

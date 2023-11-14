@@ -436,14 +436,15 @@ h4 {
     background-color: var(--black-color);
     padding: 0 0px;
     box-sizing: border-box;
-    /* display: flex;
-    justify-content: center; */
+    display: flex;
+    justify-content: center;
     overflow: hidden;
   }
   #hero-photos {
     /* margin: 0 30px; */
     height: 100%;
     width: 100%;
+    display: block;
   }
   #photo-container1 {
     width: 50%;
@@ -452,21 +453,21 @@ h4 {
     left: -40px;
   }
   #photo-container2 {
-    width: 50%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    width: 258px;
     padding-bottom: 30px;
     position: absolute;
     bottom: 10px;
-    right: -40px;
+    right: 0px;
+    clip-path: inset(0% 0% 0% 0%);
   }
   #hero-photo1 {
     width: 250px;
   }
   #hero-photo2 {
     width: 300px;
-    display: block;
+    object-fit: cover;
+    margin-left: 0;
+    display: inline;
   }
 
   #hero-text-div {

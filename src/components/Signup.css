@@ -94,6 +94,16 @@ button {
     box-sizing: border-box;
     font-family: manrope;
   }
+  .signup .alert {
+    width: 80%;
+    height: 50px;
+    top: 12vh;
+    right: 10%;
+  }
+  .signup .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -119,5 +129,13 @@ button {
     border: 1px solid grey;
     border-radius: 4px;
     color: var(--white-color);
+  }
+  .signup .alert {
+    top: 70px;
+    right: 10%;
+  }
+  .signup .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
   }
 }

@@ -64,6 +64,10 @@ button {
   background-color: var(--gold-color);
   border: none;
   font-size: 0.9rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
 
 @media screen and (max-width: 480px) {
@@ -102,6 +106,16 @@ button {
     margin-bottom: 30px;
     font-size: 2.2rem;
   }
+  .login .alert {
+    width: 80%;
+    height: 50px;
+    top: 18vh;
+    right: 10%;
+  }
+  .login .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -120,5 +134,31 @@ button {
     font-family: merchant;
     margin-bottom: 30px;
     font-size: 2.2rem;
+  }
+  .login .alert {
+    top: 70px;
+    right: 10%;
+  }
+  .login .alert h4 {
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
+}
+
+#button-loader {
+  border: 2px solid var(--grey-color);
+  border-top: 2px solid var(--black-color);
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

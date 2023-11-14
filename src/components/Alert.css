@@ -1,0 +1,26 @@
+.alert {
+  width: 40%;
+  height: 50px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 70px;
+  right: 80px;
+  background-color: lightgreen;
+  color: var(--black-color);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.alert h4 {
+  margin: 0;
+  font-family: manrope;
+}
+
+#alert-icon {
+  /* color: var(--black-color); */
+  font-size: 1.3rem;
+}
